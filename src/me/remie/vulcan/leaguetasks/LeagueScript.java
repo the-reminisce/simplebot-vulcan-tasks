@@ -10,6 +10,7 @@ import me.remie.vulcan.leaguetasks.task.tasks.emotes.EmoteUriTransformation;
 import me.remie.vulcan.leaguetasks.task.tasks.slayer.CheckSlayerTask;
 import me.remie.vulcan.leaguetasks.task.tasks.slayer.SlayerTaskDuradel;
 import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingLevel20;
+import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingPickpocketMan;
 import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingStealSilk;
 import net.runelite.api.ChatMessageType;
 import simple.hooks.scripts.Category;
@@ -71,7 +72,8 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new TravelSpiritTrees(this),
                 new TreeGnomeAgility(this),
                 new DraynorRooftopAgility(this),
-                new VarrockRooftopAgility(this)
+                new VarrockRooftopAgility(this),
+                new ThievingPickpocketMan(this)
         );
         setupPaint();
     }

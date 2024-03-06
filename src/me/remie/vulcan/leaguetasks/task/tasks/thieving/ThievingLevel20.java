@@ -65,7 +65,7 @@ public class ThievingLevel20 extends LeagueTask {
                             n.getInteracting().equals(ctx.players.getLocal().getPlayer())).isEmpty()) {
                 final SimpleNpc guard = ctx.npcs.nextNearest();
                 if (guard != null && guard.validateInteractable()) {
-                    guard.click(1);
+                    guard.menuAction("Dismiss");
                     ctx.sleep(1250);
                     return;
                 }

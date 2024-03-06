@@ -11,6 +11,7 @@ import simple.robot.utils.WorldArea;
  */
 public class LeagueScriptConstants {
 
+    public static final int LUMBRIDGE_REGION_ID = 12850;
     public static final int GNOME_STRONGHOLD_REGION_ID = 9781;
 
     public static final WorldArea HOME_AREA = new WorldArea(new WorldPoint(3072, 3521, 0), new WorldPoint(3072, 3464, 0), new WorldPoint(3137, 3474, 0), new WorldPoint(3137, 3521, 0));
