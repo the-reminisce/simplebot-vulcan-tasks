@@ -90,6 +90,8 @@ public class TreeGnomeAgility extends LeagueTask {
                 object.menuAction("Squeeze-through");
                 ctx.onCondition(() -> !ctx.pathing.inArea(GNOME_PIPE_AREA), 200, 10);
             }
+        } else if (plane == 0  && !GNOME_LOG_AREA.within()) {
+            ctx.pathing.step(GNOME_LOG_AREA.getCenterPoint());
         }
     }
 
