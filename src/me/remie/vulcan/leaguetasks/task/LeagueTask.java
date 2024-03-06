@@ -32,15 +32,15 @@ public abstract class LeagueTask {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public boolean isCompleted() {
-        return isCompleted;
+        return this.isCompleted;
     }
 
     public void setCompleted(boolean completed) {
-        isCompleted = completed;
+        this.isCompleted = completed;
     }
 
     public void setSkillRequirement(SkillRequirement skillRequirement) {
@@ -52,21 +52,21 @@ public abstract class LeagueTask {
     }
 
     public Optional<SkillRequirement> getSkillRequirement() {
-        return Optional.ofNullable(skillRequirement);
+        return Optional.ofNullable(this.skillRequirement);
     }
 
     public Optional<ItemRequirement> getItemRequirement() {
-        return Optional.ofNullable(itemRequirement);
+        return Optional.ofNullable(this.itemRequirement);
     }
 
     public boolean canComplete() {
-        if (skillRequirement != null) {
-            if (!skillRequirement.isMet()) {
+        if (this.skillRequirement != null) {
+            if (!this.skillRequirement.isMet()) {
                 return false;
             }
         }
-        if (itemRequirement != null) {
-            return itemRequirement.isMet();
+        if (this.itemRequirement != null) {
+            return this.itemRequirement.isMet();
         }
         return true;
     }

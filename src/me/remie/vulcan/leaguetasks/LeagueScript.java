@@ -51,6 +51,8 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
 
     private LeagueScriptPaint paintHelper;
 
+    private final Pattern POINTS_PATTERN = Pattern.compile("you have earned (\\d+) league points\\. you now have (\\d+) league points\\.");
+
     @Override
     public void onExecute() {
         this.startTime = System.currentTimeMillis();
@@ -79,12 +81,12 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
             return;
         }
         this.paintHelper = new LeagueScriptPaint(this);
-        paintHelper.addLine(() -> "Points: " + ctx.paint.formatValue(pointsGained));
+        this.paintHelper.addLine(() -> "Points: " + ctx.paint.formatValue(this.pointsGained));
     }
 
     @Override
     public void onProcess() {
-        if (!checkedTasks) {
+        if (!this.checkedTasks) {
             checkTasks();
             return;
         }
@@ -113,7 +115,7 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
         if (children == null || children.length == 0) {
             return;
         }
-        for (SimpleWidget child : children) {
+        for (final SimpleWidget child : children) {
             final String taskName = ScriptUtils.stripHtml(child.getText().toLowerCase());
             this.tasks.stream().filter(task -> task.getName().equalsIgnoreCase(taskName)).findFirst().ifPresent((task) -> {
                 if (child.getWidget().getTextColor() == 0xff7700) {
@@ -135,14 +137,14 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
         if (this.currentTask != null) {
             this.currentTask.setCompleted(true);
         }
-        Optional<LeagueTask> newTask = tasks.stream().filter(task -> !task.isCompleted() && task.canComplete()).findFirst();
+        final Optional<LeagueTask> newTask = tasks.stream().filter(task -> !task.isCompleted() && task.canComplete()).findFirst();
         if (newTask.isPresent()) {
             this.currentTask = newTask.get();
         }
     }
 
-    public boolean isTaskCompleted(Class<? extends LeagueTask> task) {
-        for (LeagueTask t : this.tasks) {
+    public boolean isTaskCompleted(final Class<? extends LeagueTask> task) {
+        for (final LeagueTask t : this.tasks) {
             if (t.getClass().equals(task)) {
                 return t.isCompleted();
             }
@@ -150,8 +152,8 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
         return false;
     }
 
-    public <T extends LeagueTask> T getTask(Class<T> task) {
-        for (LeagueTask t : this.tasks) {
+    public <T extends LeagueTask> T getTask(final Class<T> task) {
+        for (final LeagueTask t : this.tasks) {
             if (t.getClass().equals(task)) {
                 return (T) t;
             }
@@ -174,23 +176,19 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
 
     @Override
     public void onChatMessage(ChatMessage e) {
-        //ChatMessage(messageNode=co@334973e2, type=GAMEMESSAGE, name=, message=Congratulations, you've completed an elite leagues task:<col=a34c00> Use the Explore Emote, sender=null, timestamp=1709605487)
-        //ChatMessage(messageNode=co@39d519bf, type=GAMEMESSAGE, name=, message=You have earned <col=a34c00>200</col> league points. You now have <col=a34c00>220</col> league points., sender=null, timestamp=1709605487)
         if (e.getType() != ChatMessageType.GAMEMESSAGE || e.getSender() != null || !e.getName().isEmpty()) {
             return;
         }
         final String message = ScriptUtils.stripHtml(e.getMessage().toLowerCase());
-        if ((message.startsWith("congratulations, you've completed an ") || message.startsWith("congratulations, you've completed a ")) && message.contains("leagues task:")) {
+        if (message.matches("congratulations, you've completed an? .*leagues task:.*")) {
             final String taskName = message.split(":")[1].trim();
             this.tasks.stream().filter(task -> task.getName().equalsIgnoreCase(taskName)).findFirst().ifPresent((task) -> task.setCompleted(true));
         } else if (message.startsWith("you have earned") && message.contains("league points. you now have")) {
-            //You have earned 200 league points. You now have 220 league points.
-            Pattern pattern = Pattern.compile("you have earned (\\d+) league points\\. you now have (\\d+) league points\\.");
-            Matcher matcher = pattern.matcher(message);
+            final Matcher matcher = POINTS_PATTERN.matcher(message);
             if (matcher.find()) {
                 final int pointsEarned = Integer.parseInt(matcher.group(1));
-                this.pointsGained += pointsEarned;
                 final int totalPoints = Integer.parseInt(matcher.group(2));
+                this.pointsGained += pointsEarned;
                 this.pointsTotal = totalPoints;
                 ctx.log("Gained " + pointsEarned + " points, total: " + totalPoints);
             }
@@ -198,11 +196,11 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
     }
 
     @Override
-    public void paint(Graphics g1) {
+    public void paint(final Graphics g1) {
         if (this.paintHelper == null) {
             return;
         }
-        Graphics2D g = (Graphics2D) g1;
+        final Graphics2D g = (Graphics2D) g1;
         this.paintHelper.drawPaint(g);
     }
 

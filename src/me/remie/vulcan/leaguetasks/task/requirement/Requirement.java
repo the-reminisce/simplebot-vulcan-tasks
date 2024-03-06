@@ -10,9 +10,9 @@ import simple.robot.api.ClientContext;
  */
 public abstract class Requirement {
 
-    public ClientContext ctx;
+    public final ClientContext ctx;
 
-    public Requirement(ClientContext ctx) {
+    public Requirement(final ClientContext ctx) {
         this.ctx = ctx;
     }
 

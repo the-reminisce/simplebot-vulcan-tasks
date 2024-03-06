@@ -15,17 +15,17 @@ public class SkillRequirement extends Requirement {
 
     private final Map<SimpleSkills.Skills, Integer> skillRequirements;
 
-    public SkillRequirement(final ClientContext ctx, Map<SimpleSkills.Skills, Integer> skillRequirements) {
+    public SkillRequirement(final ClientContext ctx, final Map<SimpleSkills.Skills, Integer> skillRequirements) {
         super(ctx);
         this.skillRequirements = skillRequirements;
     }
 
     @Override
     public boolean isMet() {
-        for (Map.Entry<SimpleSkills.Skills, Integer> entry : skillRequirements.entrySet()) {
-            SimpleSkills.Skills skill = entry.getKey();
-            int requiredLevel = entry.getValue();
-            int currentLevel = ctx.skills.realLevel(skill);
+        for (final Map.Entry<SimpleSkills.Skills, Integer> entry : this.skillRequirements.entrySet()) {
+            final SimpleSkills.Skills skill = entry.getKey();
+            final int requiredLevel = entry.getValue();
+            final int currentLevel = ctx.skills.realLevel(skill);
             if (currentLevel < requiredLevel) {
                 return false;
             }
