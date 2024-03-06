@@ -38,7 +38,7 @@ public class ThievingPickpocketMan extends LeagueTask {
         if (man != null) {
             final int cachedXp = ctx.skills.experience(SimpleSkills.Skills.THIEVING);
             man.menuAction("Pickpocket");
-            ctx.onCondition(() -> cachedXp > ctx.skills.experience(SimpleSkills.Skills.THIEVING) || isCompleted(), 350, 10);
+            ctx.onCondition(() -> ctx.skills.experience(SimpleSkills.Skills.THIEVING) > cachedXp || isCompleted(), 350, 10);
         }
     }
 
