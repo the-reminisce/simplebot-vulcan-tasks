@@ -79,7 +79,6 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new CheckSlayerTask(this),
                 new ThievingLevel20(this),
                 new ThievingStealSilk(this),
-                new EquipGodBook(this),
                 new TravelDeathsDomain(this),
                 new TravelSpiritTrees(this),
                 new TreeGnomeAgility(this),
@@ -89,7 +88,8 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new TravelFossilIsland(this),
                 new TravelMosleHarmless(this),
                 new LunarIsleBank(this),
-                new CraftGhorrockTablet(this)
+                new CraftGhorrockTablet(this),
+                new EquipGodBook(this)
         );
         setupPaint();
         this.teleporterScrollHelper = new TeleporterScrollHelper(ctx);
