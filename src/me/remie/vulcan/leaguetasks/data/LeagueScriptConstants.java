@@ -11,6 +11,7 @@ import simple.robot.utils.WorldArea;
  */
 public class LeagueScriptConstants {
 
+    public static final int LUNAR_ISLE_REGION_ID = 8253;
     public static final int LUMBRIDGE_REGION_ID = 12850;
     public static final int GNOME_STRONGHOLD_REGION_ID = 9781;
 

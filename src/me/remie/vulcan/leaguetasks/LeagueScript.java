@@ -2,8 +2,11 @@ package me.remie.vulcan.leaguetasks;
 
 import me.remie.vulcan.leaguetasks.helpers.TeleporterScrollHelper;
 import me.remie.vulcan.leaguetasks.task.LeagueTask;
+import me.remie.vulcan.leaguetasks.task.tasks.CraftGhorrockTablet;
 import me.remie.vulcan.leaguetasks.task.tasks.EquipElementalStaff;
+import me.remie.vulcan.leaguetasks.task.tasks.EquipGodBook;
 import me.remie.vulcan.leaguetasks.task.tasks.EquipMithrilGloves;
+import me.remie.vulcan.leaguetasks.task.tasks.LunarIsleBank;
 import me.remie.vulcan.leaguetasks.task.tasks.OpenLeaguesMenu;
 import me.remie.vulcan.leaguetasks.task.tasks.agility.DraynorRooftopAgility;
 import me.remie.vulcan.leaguetasks.task.tasks.agility.TreeGnomeAgility;
@@ -76,6 +79,7 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new CheckSlayerTask(this),
                 new ThievingLevel20(this),
                 new ThievingStealSilk(this),
+                new EquipGodBook(this),
                 new TravelDeathsDomain(this),
                 new TravelSpiritTrees(this),
                 new TreeGnomeAgility(this),
@@ -83,7 +87,9 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new VarrockRooftopAgility(this),
                 new ThievingPickpocketMan(this),
                 new TravelFossilIsland(this),
-                new TravelMosleHarmless(this)
+                new TravelMosleHarmless(this),
+                new LunarIsleBank(this),
+                new CraftGhorrockTablet(this)
         );
         setupPaint();
         this.teleporterScrollHelper = new TeleporterScrollHelper(ctx);

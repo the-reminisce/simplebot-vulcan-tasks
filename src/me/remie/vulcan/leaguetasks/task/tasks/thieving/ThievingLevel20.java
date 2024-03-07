@@ -3,6 +3,7 @@ package me.remie.vulcan.leaguetasks.task.tasks.thieving;
 import me.remie.vulcan.leaguetasks.LeagueScript;
 import me.remie.vulcan.leaguetasks.task.LeagueTask;
 import simple.hooks.filters.SimpleSkills;
+import simple.hooks.wrappers.SimpleItem;
 import simple.hooks.wrappers.SimpleNpc;
 import simple.hooks.wrappers.SimpleObject;
 import simple.hooks.wrappers.SimpleWidget;
@@ -43,7 +44,13 @@ public class ThievingLevel20 extends LeagueTask {
                 }
                 return;
             } else {
-                ctx.bank.depositInventory();
+                for (final SimpleItem item : ctx.inventory.populate()) {
+                    if (item.getId() == 995) {
+                        continue;
+                    }
+                    item.menuAction("Deposit-All");
+                    ctx.sleep(250, 500);
+                }
                 ctx.sleep(1250);
                 ctx.bank.closeBank();
             }
