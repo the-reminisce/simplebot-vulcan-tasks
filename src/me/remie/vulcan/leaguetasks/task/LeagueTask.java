@@ -2,6 +2,7 @@ package me.remie.vulcan.leaguetasks.task;
 
 import me.remie.vulcan.leaguetasks.LeagueScript;
 import me.remie.vulcan.leaguetasks.data.LeagueScriptConstants;
+import me.remie.vulcan.leaguetasks.helpers.TeleporterScrollHelper;
 import me.remie.vulcan.leaguetasks.task.requirement.ItemRequirement;
 import me.remie.vulcan.leaguetasks.task.requirement.SkillRequirement;
 import simple.robot.api.ClientContext;
@@ -74,6 +75,10 @@ public abstract class LeagueTask {
     public abstract void run();
 
     // Helpers
+
+    public TeleporterScrollHelper getTeleporterScrollHelper() {
+        return this.script.getTeleporterScrollHelper();
+    }
 
     public boolean isAtHome() {
         return LeagueScriptConstants.HOME_AREA.within();

@@ -59,16 +59,13 @@ public class ThievingLevel20 extends LeagueTask {
             }
             return;
         }
-        if (!ctx.npcs.populate().filter(GUARD_ID).isEmpty()) {
-            if (!ctx.npcs.filter((n) ->
-                    n.getInteracting() != null &&
-                            n.getInteracting().equals(ctx.players.getLocal().getPlayer())).isEmpty()) {
-                final SimpleNpc guard = ctx.npcs.nextNearest();
-                if (guard != null && guard.validateInteractable()) {
-                    guard.menuAction("Dismiss");
-                    ctx.sleep(1250);
-                    return;
-                }
+        if (!ctx.npcs.populate().filter(GUARD_ID).isEmpty() &&
+                !ctx.npcs.filter(n -> n.getInteracting() != null && n.getInteracting().equals(ctx.players.getLocal().getPlayer())).isEmpty()) {
+            final SimpleNpc guard = ctx.npcs.nextNearest();
+            if (guard != null) {
+                guard.menuAction("Dismiss");
+                ctx.sleep(1250);
+                return;
             }
         }
 

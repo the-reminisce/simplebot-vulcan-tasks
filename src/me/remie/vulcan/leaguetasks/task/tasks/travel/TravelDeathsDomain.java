@@ -1,4 +1,4 @@
-package me.remie.vulcan.leaguetasks.task.tasks;
+package me.remie.vulcan.leaguetasks.task.tasks.travel;
 
 import me.remie.vulcan.leaguetasks.LeagueScript;
 import me.remie.vulcan.leaguetasks.task.LeagueTask;
@@ -11,13 +11,13 @@ import simple.hooks.wrappers.SimpleObject;
  * @author Reminisce <thereminisc3@gmail.com>
  * @Discord reminisce <138751815847116800>
  */
-public class EnterDeathsDomain extends LeagueTask {
+public class TravelDeathsDomain extends LeagueTask {
 
     private final int DEATHS_COFFIN_ID = 39535;
     private final int DEATHS_DOMAIN_REGION_ID = 12633;
     private final WorldPoint DEATHS_DOMAIN_COFFIN = new WorldPoint(3093, 3510, 0);
 
-    public EnterDeathsDomain(final LeagueScript script) {
+    public TravelDeathsDomain(final LeagueScript script) {
         super(script, "Visit Death's Domain");
     }
 

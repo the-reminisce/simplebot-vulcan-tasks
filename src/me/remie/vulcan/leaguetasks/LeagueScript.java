@@ -1,7 +1,10 @@
 package me.remie.vulcan.leaguetasks;
 
+import me.remie.vulcan.leaguetasks.helpers.TeleporterScrollHelper;
 import me.remie.vulcan.leaguetasks.task.LeagueTask;
-import me.remie.vulcan.leaguetasks.task.tasks.*;
+import me.remie.vulcan.leaguetasks.task.tasks.EquipElementalStaff;
+import me.remie.vulcan.leaguetasks.task.tasks.EquipMithrilGloves;
+import me.remie.vulcan.leaguetasks.task.tasks.OpenLeaguesMenu;
 import me.remie.vulcan.leaguetasks.task.tasks.agility.DraynorRooftopAgility;
 import me.remie.vulcan.leaguetasks.task.tasks.agility.TreeGnomeAgility;
 import me.remie.vulcan.leaguetasks.task.tasks.agility.VarrockRooftopAgility;
@@ -12,6 +15,10 @@ import me.remie.vulcan.leaguetasks.task.tasks.slayer.SlayerTaskDuradel;
 import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingLevel20;
 import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingPickpocketMan;
 import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingStealSilk;
+import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelDeathsDomain;
+import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelFossilIsland;
+import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelMosleHarmless;
+import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelSpiritTrees;
 import net.runelite.api.ChatMessageType;
 import simple.hooks.scripts.Category;
 import simple.hooks.scripts.LoopingScript;
@@ -51,6 +58,7 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
     private List<LeagueTask> tasks;
 
     private LeagueScriptPaint paintHelper;
+    private TeleporterScrollHelper teleporterScrollHelper;
 
     private final Pattern POINTS_PATTERN = Pattern.compile("you have earned (\\d+) league points\\. you now have (\\d+) league points\\.");
 
@@ -68,14 +76,17 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new CheckSlayerTask(this),
                 new ThievingLevel20(this),
                 new ThievingStealSilk(this),
-                new EnterDeathsDomain(this),
+                new TravelDeathsDomain(this),
                 new TravelSpiritTrees(this),
                 new TreeGnomeAgility(this),
                 new DraynorRooftopAgility(this),
                 new VarrockRooftopAgility(this),
-                new ThievingPickpocketMan(this)
+                new ThievingPickpocketMan(this),
+                new TravelFossilIsland(this),
+                new TravelMosleHarmless(this)
         );
         setupPaint();
+        this.teleporterScrollHelper = new TeleporterScrollHelper(ctx);
     }
 
     private void setupPaint() {
@@ -169,6 +180,10 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
 
     public String getScriptStatus() {
         return this.status;
+    }
+
+    public TeleporterScrollHelper getTeleporterScrollHelper() {
+        return this.teleporterScrollHelper;
     }
 
     @Override

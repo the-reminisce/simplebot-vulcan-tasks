@@ -1,4 +1,4 @@
-package me.remie.vulcan.leaguetasks.task.tasks;
+package me.remie.vulcan.leaguetasks.task.tasks.travel;
 
 import me.remie.vulcan.leaguetasks.LeagueScript;
 import me.remie.vulcan.leaguetasks.data.LeagueScriptConstants;
@@ -46,21 +46,13 @@ public class TravelSpiritTrees extends LeagueTask {
         if (tree == null) {
             return;
         }
-        if (getTeleportWidget() == null) {
+        if (!getTeleporterScrollHelper().isOpen()) {
             tree.menuAction("Talk-to");
+            ctx.sleep(1000);
+            return;
         }
-        if (ctx.onCondition(() -> getTeleportWidget() != null, 250, 10)) {
-            ctx.menuActions.sendAction(30, 1, 12255235, 0, "Continue", "");
-            ctx.onCondition(() -> ctx.pathing.regionLoaded(LeagueScriptConstants.GNOME_STRONGHOLD_REGION_ID) || isCompleted(), 250, 10);
-        }
-    }
-
-    private SimpleWidget getTeleportWidget() {
-        final SimpleWidget widget = ctx.widgets.getWidget(187, 0);
-        if (widget != null && !widget.isHidden()) {
-            return widget;
-        }
-        return null;
+        getTeleporterScrollHelper().teleport(1);
+        ctx.onCondition(() -> ctx.pathing.regionLoaded(LeagueScriptConstants.GNOME_STRONGHOLD_REGION_ID) || isCompleted(), 250, 10);
     }
 
 }
