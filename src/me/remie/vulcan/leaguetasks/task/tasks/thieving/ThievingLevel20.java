@@ -6,7 +6,6 @@ import simple.hooks.filters.SimpleSkills;
 import simple.hooks.wrappers.SimpleItem;
 import simple.hooks.wrappers.SimpleNpc;
 import simple.hooks.wrappers.SimpleObject;
-import simple.hooks.wrappers.SimpleWidget;
 
 /**
  * Created by Reminisce on Mar 04, 2024 at 11:19 PM
@@ -15,8 +14,6 @@ import simple.hooks.wrappers.SimpleWidget;
  * @Discord reminisce <138751815847116800>
  */
 public class ThievingLevel20 extends LeagueTask {
-
-    private final int GUARD_ID = 380;
 
     /**
      * This task will achieve our first level 20 stat via thieving.
@@ -55,25 +52,6 @@ public class ThievingLevel20 extends LeagueTask {
                 ctx.bank.closeBank();
             }
             return;
-        }
-
-        if (ctx.dialogue.canContinue()) {
-            SimpleWidget continueButton = ctx.dialogue.getContinueButton();
-            if (continueButton != null) {
-                continueButton.click(1);
-                ctx.onCondition(continueButton::isHidden, 250, 5);
-                return;
-            }
-            return;
-        }
-        if (!ctx.npcs.populate().filter(GUARD_ID).isEmpty() &&
-                !ctx.npcs.filter(n -> n.getInteracting() != null && n.getInteracting().equals(ctx.players.getLocal().getPlayer())).isEmpty()) {
-            final SimpleNpc guard = ctx.npcs.nextNearest();
-            if (guard != null) {
-                guard.menuAction("Dismiss");
-                ctx.sleep(1250);
-                return;
-            }
         }
 
         final SimpleObject stall = ctx.objects.populate().filter(getStallId()).nextNearest();

@@ -1,5 +1,6 @@
 package me.remie.vulcan.leaguetasks;
 
+import me.remie.vulcan.leaguetasks.data.LeagueScriptConstants;
 import me.remie.vulcan.leaguetasks.helpers.TeleporterScrollHelper;
 import me.remie.vulcan.leaguetasks.task.LeagueTask;
 import me.remie.vulcan.leaguetasks.task.tasks.CraftGhorrockTablet;
@@ -22,12 +23,16 @@ import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelDeathsDomain;
 import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelFossilIsland;
 import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelMosleHarmless;
 import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelSpiritTrees;
+import me.remie.vulcan.leaguetasks.task.tasks.woodcutting.tasks.ChopMagicLogs;
+import me.remie.vulcan.leaguetasks.task.tasks.woodcutting.tasks.ChopNormalLogs;
+import me.remie.vulcan.leaguetasks.task.tasks.woodcutting.tasks.ChopWillowLogs;
 import net.runelite.api.ChatMessageType;
 import simple.hooks.scripts.Category;
 import simple.hooks.scripts.LoopingScript;
 import simple.hooks.scripts.ScriptManifest;
 import simple.hooks.simplebot.ChatMessage;
 import simple.hooks.simplebot.Game;
+import simple.hooks.wrappers.SimpleNpc;
 import simple.hooks.wrappers.SimpleWidget;
 import simple.robot.script.Script;
 import simple.robot.utils.ScriptUtils;
@@ -63,7 +68,7 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
     private LeagueScriptPaint paintHelper;
     private TeleporterScrollHelper teleporterScrollHelper;
 
-    private final Pattern POINTS_PATTERN = Pattern.compile("you have earned (\\d+) league points\\. you now have (\\d+) league points\\.");
+    private final Pattern POINTS_PATTERN = Pattern.compile("you have earned ([\\d,]+) league points\\. you now have ([\\d,]+) league points\\.");
 
     @Override
     public void onExecute() {
@@ -81,15 +86,18 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new ThievingStealSilk(this),
                 new TravelDeathsDomain(this),
                 new TravelSpiritTrees(this),
-                new TreeGnomeAgility(this),
-                new DraynorRooftopAgility(this),
-                new VarrockRooftopAgility(this),
                 new ThievingPickpocketMan(this),
                 new TravelFossilIsland(this),
                 new TravelMosleHarmless(this),
                 new LunarIsleBank(this),
                 new CraftGhorrockTablet(this),
-                new EquipGodBook(this)
+                new TreeGnomeAgility(this),
+                new DraynorRooftopAgility(this),
+                new VarrockRooftopAgility(this),
+                new EquipGodBook(this),
+                new ChopNormalLogs(this),
+                new ChopWillowLogs(this),
+                new ChopMagicLogs(this)
         );
         setupPaint();
         this.teleporterScrollHelper = new TeleporterScrollHelper(ctx);
@@ -112,6 +120,15 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
         if (this.currentTask == null || this.currentTask.isCompleted()) {
             getNewTask();
             return;
+        }
+        if (!ctx.npcs.populate().filter(LeagueScriptConstants.PILLORY_GUARD_ID).isEmpty() &&
+                !ctx.npcs.filter(n -> n.getInteracting() != null && n.getInteracting().equals(ctx.players.getLocal().getPlayer())).isEmpty()) {
+            final SimpleNpc guard = ctx.npcs.nextNearest();
+            if (guard != null) {
+                guard.menuAction("Dismiss");
+                ctx.sleep(1250);
+                return;
+            }
         }
         this.currentTask.run();
     }
@@ -209,8 +226,8 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
         } else if (message.startsWith("you have earned") && message.contains("league points. you now have")) {
             final Matcher matcher = POINTS_PATTERN.matcher(message);
             if (matcher.find()) {
-                final int pointsEarned = Integer.parseInt(matcher.group(1));
-                final int totalPoints = Integer.parseInt(matcher.group(2));
+                final int pointsEarned = Integer.parseInt(matcher.group(1).replace(",", ""));
+                final int totalPoints = Integer.parseInt(matcher.group(2).replace(",", ""));
                 this.pointsGained += pointsEarned;
                 this.pointsTotal = totalPoints;
                 ctx.log("Gained " + pointsEarned + " points, total: " + totalPoints);

@@ -4,7 +4,6 @@ import me.remie.vulcan.leaguetasks.LeagueScript;
 import me.remie.vulcan.leaguetasks.data.LeagueScriptConstants;
 import me.remie.vulcan.leaguetasks.task.LeagueTask;
 import simple.hooks.wrappers.SimpleObject;
-import simple.hooks.wrappers.SimpleWidget;
 
 /**
  * Created by Reminisce on Mar 04, 2024 at 11:40 PM
