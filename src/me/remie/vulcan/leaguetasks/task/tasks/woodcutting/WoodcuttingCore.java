@@ -55,10 +55,6 @@ public class WoodcuttingCore extends LeagueTask {
             }
             return;
         }
-        if (ctx.pathing.energyLevel() >= 30 && !ctx.pathing.running()) {
-            ctx.pathing.running(true);
-            return;
-        }
         if (ctx.inventory.inventoryFull()) {
             handleBanking();
             return;

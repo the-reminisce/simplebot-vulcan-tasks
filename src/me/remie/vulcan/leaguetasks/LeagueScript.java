@@ -136,6 +136,12 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 return;
             }
         }
+
+        if (ctx.pathing.energyLevel() >= 30 && !ctx.pathing.running()) {
+            ctx.pathing.running(true);
+            return;
+        }
+        
         this.currentTask.run();
     }
 
