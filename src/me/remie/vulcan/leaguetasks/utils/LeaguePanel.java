@@ -45,24 +45,11 @@ for (LeaguePanelFilterType filterType : LeaguePanelFilterType.values()) {
     }
 
     public boolean clearAllFilterOptions() {
-        if (!chooseAllInDropDown(LeaguePanelFilterType.FILTER_TIER.getWidgetId(), LeaguePanelFilterType.FILTER_TIER.getAllOptionWidgetId())) {
-            ctx.log("Something went wrong choosing tier option");
-            return false;
-        }
-
-        if (!chooseAllInDropDown(LeaguePanelFilterType.FILTER_TYPE.getWidgetId(), LeaguePanelFilterType.FILTER_TYPE.getAllOptionWidgetId())) {
-            ctx.log("Something went wrong choosing type option");
-            return false;
-        }
-
-        if (!chooseAllInDropDown(LeaguePanelFilterType.FILTER_AREA.getWidgetId(), LeaguePanelFilterType.FILTER_AREA.getAllOptionWidgetId())) {
-            ctx.log("Something went wrong choosing area option");
-            return false;
-        }
-
-        if (!chooseAllInDropDown(LeaguePanelFilterType.FILTER_COMPLETED.getWidgetId(), LeaguePanelFilterType.FILTER_COMPLETED.getAllOptionWidgetId())) {
-            ctx.log("Something went wrong choosing completed option");
-            return false;
+        for (LeaguePanelFilterType filterType : LeaguePanelFilterType.values()) {
+            if (!chooseAllInDropDown(filterType.getWidgetId(), filterType.getAllOptionWidgetId())) {
+                ctx.log("Something went wrong choosing " + filterType.name() + " option");
+                return false;
+            }
         }
         return true;
     }
