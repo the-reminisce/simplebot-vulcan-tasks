@@ -26,12 +26,14 @@ import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelSpiritTrees;
 import me.remie.vulcan.leaguetasks.task.tasks.woodcutting.tasks.ChopMagicLogs;
 import me.remie.vulcan.leaguetasks.task.tasks.woodcutting.tasks.ChopNormalLogs;
 import me.remie.vulcan.leaguetasks.task.tasks.woodcutting.tasks.ChopWillowLogs;
+import me.remie.vulcan.leaguetasks.utils.LeaguePanel;
+
 import net.runelite.api.ChatMessageType;
 import simple.hooks.scripts.Category;
 import simple.hooks.scripts.LoopingScript;
 import simple.hooks.scripts.ScriptManifest;
 import simple.hooks.simplebot.ChatMessage;
-import simple.hooks.simplebot.Game;
+
 import simple.hooks.wrappers.SimpleNpc;
 import simple.hooks.wrappers.SimpleWidget;
 import simple.robot.script.Script;
@@ -66,13 +68,17 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
     private List<LeagueTask> tasks;
 
     private LeagueScriptPaint paintHelper;
+
     private TeleporterScrollHelper teleporterScrollHelper;
 
     private final Pattern POINTS_PATTERN = Pattern.compile("you have earned ([\\d,]+) league points\\. you now have ([\\d,]+) league points\\.");
 
+    private LeaguePanel leaguePanel;
+
     @Override
     public void onExecute() {
         this.startTime = System.currentTimeMillis();
+        this.leaguePanel = new LeaguePanel(ctx);
         this.status = "Waiting to start...";
         this.tasks = Arrays.asList(
                 new OpenLeaguesMenu(this),
@@ -134,19 +140,20 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
     }
 
     private void checkTasks() {
-        final SimpleWidget leaguesWidget = ctx.widgets.getWidget(657, 18);
-        if (leaguesWidget == null || leaguesWidget.isHidden()) {
-            ctx.log("Opening leagues menu");
-            ctx.game.tab(Game.Tab.QUESTS);
-            ctx.menuActions.clickButton(41222167);
-            ctx.sleep(1000);
-            ctx.menuActions.clickButton(42991640);
-            ctx.onCondition(() -> {
-                final SimpleWidget leaguesWidget1 = ctx.widgets.getWidget(657, 18);
-                return leaguesWidget1 != null && !leaguesWidget1.isHidden();
-            }, 1000, 5);
+        if (!leaguePanel.openLeaguePanel()) {
             return;
         }
+
+        if (leaguePanel.doWeNeedToClearFilters()) {
+            leaguePanel.clearAllFilterOptions();
+            return;
+        }
+
+        final SimpleWidget leaguesWidget = leaguePanel.getLeaguePanelWidget();
+        if (leaguesWidget == null) {
+            return;
+        }
+
         final SimpleWidget[] children = leaguesWidget.getDynamicChildren();
         if (children == null || children.length == 0) {
             return;
