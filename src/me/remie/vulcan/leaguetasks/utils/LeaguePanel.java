@@ -34,16 +34,15 @@ for (LeaguePanelFilterType filterType : LeaguePanelFilterType.values()) {
     }
 
     private boolean chooseAllInDropDown(int filterWidgetId, int filterDropdownOptionId) {
-        final SimpleWidget filterDropDownMenu = ctx.widgets.getWidget(WIDGET_ID,filterWidgetId);
-        if (filterDropDownMenu != null) {
-            if (!isOptionSelected(filterDropDownMenu)) {
-                final SimpleWidget selectedOption = filterDropDownMenu.getChild(4);
-                final SimpleWidget dropDownMenu = ctx.widgets.getWidget(WIDGET_ID, filterDropdownOptionId);
-                if (!chooseOptionInDropdown(selectedOption, dropDownMenu)) {
-                    ctx.log("Something went wrong choosing all in options");
-                    return false;
-                }
-            }
+        final SimpleWidget filterDropDownMenu = ctx.widgets.getWidget(WIDGET_ID, filterWidgetId);
+        if (filterDropDownMenu == null || isOptionSelected(filterDropDownMenu)) {
+            return true;
+        }
+        final SimpleWidget selectedOption = filterDropDownMenu.getChild(4);
+        final SimpleWidget dropDownMenu = ctx.widgets.getWidget(WIDGET_ID, filterDropdownOptionId);
+        if (!chooseOptionInDropdown(selectedOption, dropDownMenu)) {
+            ctx.log("Something went wrong choosing all in options");
+            return false;
         }
         return true;
     }
