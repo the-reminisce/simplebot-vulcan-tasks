@@ -5,7 +5,7 @@ import simple.hooks.wrappers.SimpleWidget;
 import simple.robot.api.ClientContext;
 
 public class LeaguePanel {
-    private ClientContext ctx;
+    private final ClientContext ctx;
     private static final int WIDGET_ID = 657;
 
     public LeaguePanel(final ClientContext ctx) {
