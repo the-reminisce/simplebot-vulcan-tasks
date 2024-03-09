@@ -1,5 +1,8 @@
 package me.remie.vulcan.leaguetasks.task.tasks.thieving;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import me.remie.vulcan.leaguetasks.LeagueScript;
 import me.remie.vulcan.leaguetasks.task.LeagueTask;
 import simple.hooks.filters.SimpleSkills;
@@ -41,12 +44,14 @@ public class ThievingLevel20 extends LeagueTask {
                 }
                 return;
             } else {
-                for (final SimpleItem item : ctx.inventory.populate()) {
-                    if (item.getId() == 995) {
+                final Set<Integer> depositedIds = new HashSet<>();
+                for (final SimpleItem item : ctx.inventory.populate().omit(995)) {
+                    if (depositedIds.contains(item.getId())) {
                         continue;
                     }
                     item.menuAction("Deposit-All");
-                    ctx.sleep(250, 500);
+                    depositedIds.add(item.getId());
+                    ctx.sleep(50, 150);
                 }
                 ctx.sleep(1250);
                 ctx.bank.closeBank();

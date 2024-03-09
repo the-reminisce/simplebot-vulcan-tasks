@@ -16,7 +16,7 @@ import simple.hooks.wrappers.SimpleItem;
 public class EquipGodBook extends LeagueTask {
 
     private static final int UNHOLY_BOOK = 3840;
-    private static final ItemDetails itemDetails = new ItemDetails("Unholy book", UNHOLY_BOOK, 30_000);
+    private static final ItemDetails itemDetails = new ItemDetails("Unholy book", UNHOLY_BOOK, 45_000);
 
     private final ShopHelper shopHelper;
 

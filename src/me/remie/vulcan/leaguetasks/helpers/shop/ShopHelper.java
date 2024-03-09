@@ -78,6 +78,9 @@ public class ShopHelper {
             return true;
         }
         if (!checkedBank) {
+            if (!task.teleportHome()) {
+                return false;
+            }
             if (ctx.bank.openBank()) {
                 ctx.sleep(500, 1000);
                 if (!ctx.bank.populate().filter(itemDetails.getItemId()).isEmpty()) {
