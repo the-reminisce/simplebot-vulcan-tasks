@@ -23,10 +23,14 @@ for (LeaguePanelFilterType filterType : LeaguePanelFilterType.values()) {
     }
 
     private boolean isOptionSelected(SimpleWidget widget) {
-        if (widget == null || widget.getChild(4) == null || widget.getChild(4).getText() == null) {
+        if (widget == null) {
             return false;
         }
-        return widget.getChild(4).getText().equalsIgnoreCase("all");
+        final SimpleWidget child = widget.getChild(4);
+        if (child == null) {
+            return false;
+        }
+        return "all".equalsIgnoreCase(child.getText());
     }
 
     private boolean chooseAllInDropDown(int filterWidgetId, int filterDropdownOptionId) {
