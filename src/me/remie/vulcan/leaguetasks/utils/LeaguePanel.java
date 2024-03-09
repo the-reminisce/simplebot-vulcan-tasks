@@ -13,26 +13,12 @@ public class LeaguePanel {
     }
 
     public boolean doWeNeedToClearFilters() {
-        final SimpleWidget tierDropDownMenu = ctx.widgets.getWidget(WIDGET_ID, LeaguePanelFilterType.FILTER_TIER.getWidgetId());
-        if (!isOptionSelected(tierDropDownMenu)) {
-            return true;
+for (LeaguePanelFilterType filterType : LeaguePanelFilterType.values()) {
+            SimpleWidget dropDownMenu = ctx.widgets.getWidget(WIDGET_ID, filterType.getWidgetId());
+            if (!isOptionSelected(dropDownMenu)) {
+                return true;
+            }
         }
-
-        final SimpleWidget typeDropDownMenu = ctx.widgets.getWidget(WIDGET_ID, LeaguePanelFilterType.FILTER_TYPE.getWidgetId());
-        if (!isOptionSelected(typeDropDownMenu)) {
-            return true;
-        }
-
-        final SimpleWidget areaDropDownMenu = ctx.widgets.getWidget(WIDGET_ID,LeaguePanelFilterType.FILTER_AREA.getWidgetId());
-        if (!isOptionSelected(areaDropDownMenu)) {
-            return true;
-        }
-
-        final SimpleWidget completedDropDownMenu = ctx.widgets.getWidget(WIDGET_ID, LeaguePanelFilterType.FILTER_COMPLETED.getWidgetId());
-        if (!isOptionSelected(completedDropDownMenu)) {
-            return true;
-        }
-
         return false;
     }
 
