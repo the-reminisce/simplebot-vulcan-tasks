@@ -17,6 +17,7 @@ public class OpenLeaguesMenu extends LeagueTask {
 
     @Override
     public void run() {
+        script.setScriptStatus("Opening up Leagues menu");
         ctx.menuActions.clickButton(42991640);
         ctx.sleep(1000);
     }

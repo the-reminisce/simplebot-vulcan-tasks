@@ -35,6 +35,7 @@ public class TravelSpiritTrees extends LeagueTask {
                 return;
             }
             if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleporting to Tree gnome");
                 ctx.teleporter.teleportStringPath("Cities", "Tree gnome");
                 ctx.onCondition(() -> ctx.pathing.regionLoaded(TREE_GNOME_REGION_ID), 250, 10);
                 return;
@@ -46,10 +47,12 @@ public class TravelSpiritTrees extends LeagueTask {
             return;
         }
         if (!getTeleporterScrollHelper().isOpen()) {
+            script.setScriptStatus("Talk to tree");
             tree.menuAction("Talk-to");
             ctx.sleep(1000);
             return;
         }
+        script.setScriptStatus("Teleporting");
         getTeleporterScrollHelper().teleport(1);
         ctx.onCondition(() -> ctx.pathing.regionLoaded(LeagueScriptConstants.GNOME_STRONGHOLD_REGION_ID) || isCompleted(), 250, 10);
     }

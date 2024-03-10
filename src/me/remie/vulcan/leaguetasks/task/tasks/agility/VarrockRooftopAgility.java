@@ -61,6 +61,7 @@ public class VarrockRooftopAgility extends LeagueTask {
                 return;
             }
             if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleporting to Varrock");
                 ctx.teleporter.teleportStringPath("Cities", "Varrock");
                 ctx.onCondition(() -> ctx.pathing.regionLoaded(VARROCK_REGION_ID), 250, 10);
                 return;
@@ -75,6 +76,7 @@ public class VarrockRooftopAgility extends LeagueTask {
             if (ROUGH_WALL_AREA.within()) {
                 final SimpleObject object = ctx.objects.populate().filter("Rough wall").nextNearest();
                 if (object != null) {
+                    script.setScriptStatus("Climbing up wall");
                     object.menuAction("Climb");
                     ctx.onCondition(() -> !ctx.pathing.inArea(ROUGH_WALL_AREA), 200, 10);
                 }
@@ -86,48 +88,56 @@ public class VarrockRooftopAgility extends LeagueTask {
         } else if (CLOTHES_LINE_AREA.within()) {
             final SimpleObject object = ctx.objects.populate().filter("Clothes line").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Balancing across the line");
                 object.menuAction("Cross");
                 ctx.onCondition(() -> ctx.pathing.inArea(LEAP_GAP_AREA_1), 200, 10);
             }
         } else if (ctx.pathing.inArea(LEAP_GAP_AREA_1)) {
             final SimpleObject object = ctx.objects.populate().filter("Gap").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Jumping down");
                 object.menuAction("Leap");
                 ctx.onCondition(() -> ctx.pathing.inArea(BALANCE_WALL_AREA), 200, 10);
             }
         } else if (ctx.pathing.inArea(BALANCE_WALL_AREA)) {
             final SimpleObject object = ctx.objects.populate().filter("Wall").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Get across the wall");
                 object.menuAction("Balance");
                 ctx.onCondition(() -> ctx.pathing.inArea(LEAP_GAP_AREA_2), 200, 10);
             }
         } else if (ctx.pathing.inArea(LEAP_GAP_AREA_2)) {
             final SimpleObject object = ctx.objects.populate().filter("Gap").filter(14833).nextNearest();
             if (object != null) {
+                script.setScriptStatus("Leap to next building");
                 object.menuAction("Leap");
                 ctx.onCondition(() -> ctx.pathing.inArea(LEAP_GAP_AREA_3), 200, 10);
             }
         } else if (ctx.pathing.inArea(LEAP_GAP_AREA_3)) {
             final SimpleObject object = ctx.objects.populate().filter("Gap").filter(14834).nextNearest();
             if (object != null) {
+                script.setScriptStatus("Crazy parkour");
                 object.menuAction("Leap");
                 ctx.onCondition(() -> ctx.pathing.inArea(LEAP_GAP_AREA_4), 200, 10);
             }
         } else if (ctx.pathing.inArea(LEAP_GAP_AREA_4)) {
             final SimpleObject object = ctx.objects.populate().filter("Gap").filter(14835).nextNearest();
             if (object != null) {
+                script.setScriptStatus("Leap to next building");
                 object.menuAction("Leap");
                 ctx.onCondition(() -> ctx.pathing.inArea(LEDGE_AREA), 200, 10);
             }
         } else if (ctx.pathing.inArea(LEDGE_AREA)) {
             final SimpleObject object = ctx.objects.populate().filter("Ledge").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Climb ledge");
                 object.menuAction("Hurdle");
                 ctx.onCondition(() -> ctx.pathing.inArea(EDGE_AREA), 200, 10);
             }
         } else if (ctx.pathing.inArea(EDGE_AREA)) {
             final SimpleObject object = ctx.objects.populate().filter("Edge").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Jumping off building");
                 object.menuAction("Jump-off");
                 ctx.onCondition(() -> ctx.pathing.plane() == 0, 200, 10);
             }

@@ -27,6 +27,7 @@ public class TravelDeathsDomain extends LeagueTask {
             return;
         }
         if (ctx.pathing.distanceTo(DEATHS_DOMAIN_COFFIN) >= 5) {
+            script.setScriptStatus("Navigating to Death's domain");
             ctx.pathing.step(DEATHS_DOMAIN_COFFIN);
             ctx.sleep(500, 1000);
             return;
@@ -35,6 +36,7 @@ public class TravelDeathsDomain extends LeagueTask {
         if (coffin == null) {
             return;
         }
+        script.setScriptStatus("Entering Death's domain");
         coffin.menuAction("Enter");
         ctx.onCondition(() -> ctx.pathing.regionLoaded(DEATHS_DOMAIN_REGION_ID) || isCompleted(), 250, 10);
     }

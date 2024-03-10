@@ -31,12 +31,14 @@ public class CraftGhorrockTablet extends LeagueTask {
                 return;
             }
             if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleporting to Lunar isle");
                 ctx.teleporter.teleportStringPath("Cities", "Lunar isle");
                 ctx.onCondition(() -> ctx.pathing.regionLoaded(LeagueScriptConstants.LUNAR_ISLE_REGION_ID), 250, 10);
                 return;
             }
         }
         if (!ctx.pathing.onTile(LECTERN_TILE)) {
+            script.setScriptStatus("Navigating to lectern");
             ctx.menuActions.step(LECTERN_TILE);
             ctx.sleep(500, 1000);
             return;
@@ -45,6 +47,7 @@ public class CraftGhorrockTablet extends LeagueTask {
         if (lectern == null) {
             return;
         }
+        script.setScriptStatus("Crafting Ghorrock tablet");
         lectern.menuAction("Study");
         ctx.onCondition(this::isCompleted, 350, 10);
     }

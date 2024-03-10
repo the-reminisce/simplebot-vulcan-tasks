@@ -24,12 +24,14 @@ public class TravelMosleHarmless extends LeagueTask {
                 return;
             }
             if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleporting to Mos le harmless");
                 ctx.teleporter.teleportStringPath("Cities", "Mos le harmless");
                 ctx.onCondition(() -> ctx.pathing.regionLoaded(MOS_LE_HARMLESS_REGION_ID), 250, 10);
                 return;
             }
         }
         //Teleport back home as we're already at Mos Le'Harmless
+        script.setScriptStatus("Teleporting home");
         teleportHome();
     }
 

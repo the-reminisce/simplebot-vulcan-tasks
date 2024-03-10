@@ -38,6 +38,7 @@ public class ThievingLevel20 extends LeagueTask {
         if (ctx.inventory.inventoryFull()) {
             if (!ctx.bank.bankOpen()) {
                 final SimpleNpc banker = ctx.npcs.populate().filter(3887).nextNearest();
+                script.setScriptStatus("Opening up bank");
                 if (banker != null) {
                     banker.menuAction("Bank");
                     ctx.onCondition(ctx.bank::bankOpen, 250, 10);
@@ -49,6 +50,7 @@ public class ThievingLevel20 extends LeagueTask {
                     if (depositedIds.contains(item.getId())) {
                         continue;
                     }
+                    script.setScriptStatus("Deposit items");
                     item.menuAction("Deposit-All");
                     depositedIds.add(item.getId());
                     ctx.sleep(50, 150);
@@ -68,6 +70,7 @@ public class ThievingLevel20 extends LeagueTask {
             ctx.sleep(500, 1000);
             return;
         }
+        script.setScriptStatus("Stealing from " + stall.getName());
         stall.menuAction("Steal from");
         ctx.sleep(1250);
     }

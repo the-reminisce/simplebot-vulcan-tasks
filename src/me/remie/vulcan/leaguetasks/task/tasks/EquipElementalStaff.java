@@ -26,6 +26,7 @@ public class EquipElementalStaff extends LeagueTask {
     public void run() {
         final SimpleItem staff = ctx.inventory.populate().filter(STAFF_OF_FIRE).next();
         if (staff != null) {
+            script.setScriptStatus("Equipping Elemental staff");
             staff.menuAction("Wear");
             ctx.sleep(1000);
         }

@@ -18,6 +18,7 @@ public class EmoteUriTransformation extends LeagueTask {
 
     @Override
     public void run() {
+        script.setScriptStatus("Performing transform into Uri");
         ctx.game.tab(Game.Tab.EMOTES);
         ctx.sleep(1000);
         ctx.menuActions.sendAction(57, 45, 14155778, 1, "Perform", "<col=ff9040>Uri transform</col>");

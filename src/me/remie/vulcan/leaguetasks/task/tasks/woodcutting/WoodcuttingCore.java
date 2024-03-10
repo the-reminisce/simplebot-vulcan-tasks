@@ -41,6 +41,7 @@ public class WoodcuttingCore extends LeagueTask {
     @Override
     public void run() {
         if (!getShopHelper().hasItem()) {
+            script.setScriptStatus("Acquiring " + getRequiredAxe().getItemName());
             getShopHelper().buyItem(getRequiredAxe(), ShopType.GENERAL_STORE);
             return;
         }
@@ -49,6 +50,7 @@ public class WoodcuttingCore extends LeagueTask {
                 return;
             }
             if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleporting to Woodcutting Area");
                 ctx.teleporter.teleportStringPath("Skilling", "Woodcutting Area");
                 ctx.onCondition(LeagueScriptConstants.WOODCUTTING_GUILD_AREA::within, 350, 10);
                 return;
@@ -62,6 +64,7 @@ public class WoodcuttingCore extends LeagueTask {
 
         final WoodcuttingTree tree = getBestTree();
         if (ctx.pathing.inArea(tree.getArea()) && ctx.pathing.distanceTo(tree.getArea().getCenterPoint()) >= 17) {
+            script.setScriptStatus("Navigating to " + tree.getTreeName());
             ctx.menuActions.step(tree.getArea().getCenterPoint());
             return;
         }
@@ -69,6 +72,7 @@ public class WoodcuttingCore extends LeagueTask {
             final SimpleObject treeObject = ctx.objects.populate().filter(tree.getTreeName())
                     .filter(LeagueScriptConstants.WOODCUTTING_GUILD_AREA).filter(tree.getArea()).nextNearest();
             if (treeObject != null) {
+                script.setScriptStatus("Chopping down " + treeObject.getName());
                 treeObject.menuAction("Chop down");
                 ctx.onCondition(() -> ctx.players.getLocal().getAnimation() != -1, 250, 10);
                 return;

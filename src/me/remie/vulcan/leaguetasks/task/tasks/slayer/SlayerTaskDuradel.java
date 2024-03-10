@@ -25,6 +25,7 @@ public class SlayerTaskDuradel extends LeagueTask {
             return;
         }
         if (ctx.pathing.distanceTo(DURADEL_LOCATION) >= 5) {
+            script.setScriptStatus("Navigate to Duradel");
             ctx.pathing.step(DURADEL_LOCATION);
             ctx.sleep(500, 1000);
             return;
@@ -33,6 +34,7 @@ public class SlayerTaskDuradel extends LeagueTask {
         if (duradel == null) {
             return;
         }
+        script.setScriptStatus("Grabbing assignment");
         duradel.menuAction("Assignment");
         ctx.onCondition(() -> ctx.dialogue.dialogueOpen() || isCompleted(), 250, 10);
     }

@@ -33,6 +33,7 @@ public class EquipGodBook extends LeagueTask {
         if (!ctx.inventory.populate().filter(UNHOLY_BOOK).isEmpty()) {
             final SimpleItem book = ctx.inventory.next();
             if (book != null) {
+                script.setScriptStatus("Equipping God book");
                 book.menuAction("Wear");
                 ctx.onCondition(this::isCompleted, 250, 10);
             }

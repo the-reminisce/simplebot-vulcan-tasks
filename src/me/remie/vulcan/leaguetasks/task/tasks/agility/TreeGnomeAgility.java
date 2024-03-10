@@ -51,46 +51,54 @@ public class TreeGnomeAgility extends LeagueTask {
         if (GNOME_LOG_AREA.within()) {
             SimpleObject object = ctx.objects.populate().filter("Log balance").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Balance log");
                 object.menuAction("Walk-across");
                 ctx.onCondition(() -> !ctx.pathing.inArea(GNOME_LOG_AREA), 200, 10);
             }
         } else if (GNOME_NET_AREA.within()) {
             SimpleObject object = ctx.objects.populate().filter("Obstacle net").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Climbing up");
                 object.menuAction("Climb-over");
                 ctx.onCondition(() -> ctx.pathing.plane() == 1, 200, 10);
             }
         } else if (plane == 1) {
             SimpleObject object = ctx.objects.populate().filter("Tree branch").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Climbing up");
                 object.menuAction("Climb");
                 ctx.onCondition(() -> ctx.pathing.plane() == 2, 200, 10);
             }
         } else if (ctx.pathing.reachable(new WorldPoint(2473, 3420, 2))) {
             SimpleObject object = ctx.objects.populate().filter("Balancing rope").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Balancing rope");
                 object.menuAction("Walk-on");
                 ctx.onCondition(() -> !ctx.pathing.reachable(new WorldPoint(2473, 3420, 2)), 200, 10);
             }
         } else if (ctx.pathing.reachable(new WorldPoint(2483, 3420, 2))) {
             SimpleObject object = ctx.objects.populate().filter("Tree branch").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Climbing down");
                 object.menuAction("Climb-down");
                 ctx.onCondition(() -> !ctx.pathing.reachable(new WorldPoint(2483, 3420, 2)), 200, 10);
             }
         } else if (GNOME_NET_AREA_2.within()) {
             SimpleObject object = ctx.objects.populate().filter("Obstacle net").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Climbing up");
                 object.menuAction("Climb-over");
                 ctx.onCondition(() -> !ctx.pathing.inArea(GNOME_NET_AREA_2), 200, 10);
             }
         } else if (GNOME_PIPE_AREA.within()) {
             SimpleObject object = ctx.objects.populate().filter("Obstacle pipe").filterWithin(PIPE_LOCATION, 1).nextNearest();
             if (object != null) {
+                script.setScriptStatus("Squeezing through");
                 object.menuAction("Squeeze-through");
                 ctx.onCondition(() -> !ctx.pathing.inArea(GNOME_PIPE_AREA), 200, 10);
             }
         } else if (plane == 0 && !GNOME_LOG_AREA.within()) {
+            script.setScriptStatus("Walk to gnome area");
             ctx.pathing.step(GNOME_LOG_AREA.getCenterPoint());
         }
     }

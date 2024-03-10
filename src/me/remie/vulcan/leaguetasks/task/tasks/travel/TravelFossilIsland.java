@@ -27,6 +27,7 @@ public class TravelFossilIsland extends LeagueTask {
                 return;
             }
             if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleporting to Ancient wyvern");
                 ctx.teleporter.teleportStringPath("Dungeons", "Ancient wyvern cave");
                 ctx.onCondition(() -> ctx.pathing.regionLoaded(WYVERN_CAVERN_REGION_ID), 250, 10);
                 return;
@@ -38,11 +39,13 @@ public class TravelFossilIsland extends LeagueTask {
             if (caveExit == null) {
                 return;
             }
+            script.setScriptStatus("Exiting cave");
             caveExit.menuAction("Exit");
             ctx.onCondition(() -> ctx.pathing.regionLoaded(FOSSIL_ISLAND_REGION_ID) || isCompleted(), 250, 10);
             return;
         }
         //Teleport back home as we're already on Fossil Island
+        script.setScriptStatus("Teleporting home");
         teleportHome();
     }
 
