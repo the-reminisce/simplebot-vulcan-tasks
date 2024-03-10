@@ -11,12 +11,20 @@ import simple.robot.utils.WorldArea;
  */
 public class LeagueScriptConstants {
 
+    // NPC ID's
     public static final int PILLORY_GUARD_ID = 380;
+    public static final int BANKER_NPC_ID = 3887;
 
+    // Item ID's
+    public static final int COINS_ID = 995;
+
+    // Region ID's
     public static final int LUNAR_ISLE_REGION_ID = 8253;
     public static final int LUMBRIDGE_REGION_ID = 12850;
+    public static final int CATHERBY_REGION_ID = 11061;
     public static final int GNOME_STRONGHOLD_REGION_ID = 9781;
 
+    // Areas
     public static final WorldArea HOME_AREA = new WorldArea(new WorldPoint(3072, 3521, 0), new WorldPoint(3072, 3464, 0), new WorldPoint(3137, 3474, 0), new WorldPoint(3137, 3521, 0));
 
     public static final WorldArea WOODCUTTING_GUILD_AREA = new WorldArea(
@@ -61,4 +69,8 @@ public class LeagueScriptConstants {
             new WorldPoint(1655, 3517, 0)
     );
 
+    public static final WorldArea CATHERBY_BANK_AREA = new WorldArea(
+            new WorldPoint(2805, 3443, 0),
+            new WorldPoint(2813, 3437,0)
+    );
 }

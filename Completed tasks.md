@@ -38,6 +38,7 @@ They are presented in no particular order but have been listed with
 31. Chop Some Logs - [10] Rem
 32. Chop 100 Willow Logs - [40] Rem
 33. Chop 75 Magic Logs - [80] Rem
+34. Catch a Shrimp - [10] mcrea
+35. Catch an Anchovy - [10] mcrea
 
-
-Total points: 1660
+Total points: 1660  
