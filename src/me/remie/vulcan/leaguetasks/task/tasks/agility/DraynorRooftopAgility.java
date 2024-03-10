@@ -60,6 +60,7 @@ public class DraynorRooftopAgility extends LeagueTask {
                 return;
             }
             if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleporting to Draynor village");
                 ctx.teleporter.teleportStringPath("Cities", "Draynor village");
                 ctx.onCondition(() -> ctx.pathing.regionLoaded(DRAYNOR_REGION_ID), 250, 10);
                 return;
@@ -74,6 +75,7 @@ public class DraynorRooftopAgility extends LeagueTask {
             if (ROUGH_WALL_AREA.within()) {
                 final SimpleObject object = ctx.objects.populate().filter("Rough wall").nextNearest();
                 if (object != null) {
+                    script.setScriptStatus("Climbing up rough wall");
                     object.menuAction("Climb");
                     ctx.onCondition(() -> !ctx.pathing.inArea(ROUGH_WALL_AREA), 200, 10);
                 }
@@ -85,30 +87,35 @@ public class DraynorRooftopAgility extends LeagueTask {
         } else if (TIGHT_ROPE_AREA.within() || TIGHT_ROPE_AREA_2.within()) {
             final SimpleObject object = ctx.objects.populate().filter("Tightrope").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Cross tightrope");
                 object.menuAction("Cross");
                 ctx.onCondition(() -> ctx.pathing.inArea(NARROW_WALL_AREA), 200, 10);
             }
         } else if (ctx.pathing.inArea(NARROW_WALL_AREA)) {
             final SimpleObject object = ctx.objects.populate().filter("Narrow Wall").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Balance narrow wall");
                 object.menuAction("Balance");
                 ctx.onCondition(() -> ctx.pathing.inArea(WALL_AREA), 200, 10);
             }
         } else if (ctx.pathing.inArea(WALL_AREA)) {
             final SimpleObject object = ctx.objects.populate().filter("Wall").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Climb wall");
                 object.menuAction("Jump-up");
                 ctx.onCondition(() -> ctx.pathing.inArea(GAP_AREA), 200, 10);
             }
         } else if (ctx.pathing.inArea(GAP_AREA)) {
             final SimpleObject object = ctx.objects.populate().filter("Gap").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Jumping down");
                 object.menuAction("Jump");
                 ctx.onCondition(() -> ctx.pathing.inArea(CRATE_AREA), 200, 10);
             }
         } else if (ctx.pathing.inArea(CRATE_AREA)) {
             final SimpleObject object = ctx.objects.populate().filter("Crate").nextNearest();
             if (object != null) {
+                script.setScriptStatus("Jumping down");
                 object.menuAction("Climb-down");
                 ctx.onCondition(() -> ctx.pathing.plane() == 0, 200, 10);
             }

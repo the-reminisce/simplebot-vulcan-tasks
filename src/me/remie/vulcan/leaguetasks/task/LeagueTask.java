@@ -88,6 +88,7 @@ public abstract class LeagueTask {
         if (isAtHome()) {
             return true;
         }
+        script.setScriptStatus("Teleporting home");
         ctx.chat.sendMessage("::home");
         return ctx.onCondition(this::isAtHome, 350, 10);
     }

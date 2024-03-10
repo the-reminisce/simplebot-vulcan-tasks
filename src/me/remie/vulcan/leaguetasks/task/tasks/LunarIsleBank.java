@@ -27,12 +27,14 @@ public class LunarIsleBank extends LeagueTask {
                 return;
             }
             if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleporting to Lunar isle");
                 ctx.teleporter.teleportStringPath("Cities", "Lunar isle");
                 ctx.onCondition(() -> ctx.pathing.regionLoaded(LeagueScriptConstants.LUNAR_ISLE_REGION_ID), 250, 10);
                 return;
             }
         }
         if (!ctx.pathing.onTile(BANK_TILE)) {
+            script.setScriptStatus("Navigating to bank");
             ctx.menuActions.step(BANK_TILE);
             ctx.sleep(500, 1000);
             return;
@@ -41,6 +43,7 @@ public class LunarIsleBank extends LeagueTask {
         if (bank == null) {
             return;
         }
+        script.setScriptStatus("Opening up bank");
         bank.menuAction("Bank");
         if (ctx.onCondition(ctx.bank::bankOpen, 350, 10)) {
             ctx.bank.closeBank();

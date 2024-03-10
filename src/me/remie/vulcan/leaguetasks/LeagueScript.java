@@ -146,11 +146,13 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
     }
 
     private void checkTasks() {
+        setScriptStatus("Opening League panel");
         if (!leaguePanel.openLeaguePanel()) {
             return;
         }
 
         if (leaguePanel.doWeNeedToClearFilters()) {
+            setScriptStatus("Clearing filters");
             leaguePanel.clearAllFilterOptions();
             return;
         }
@@ -160,6 +162,7 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
             return;
         }
 
+        setScriptStatus("Crunching numbers...");
         final SimpleWidget[] children = leaguesWidget.getDynamicChildren();
         if (children == null || children.length == 0) {
             return;
@@ -216,6 +219,9 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
 
     public String getScriptStatus() {
         return this.status;
+    }
+    public void setScriptStatus(String status) {
+        this.status = status;
     }
 
     public TeleporterScrollHelper getTeleporterScrollHelper() {

@@ -18,6 +18,7 @@ public class EmoteExplore extends LeagueTask {
 
     @Override
     public void run() {
+        script.setScriptStatus("Performing Explorer emote");
         ctx.game.tab(Game.Tab.EMOTES);
         ctx.sleep(1000);
         ctx.menuActions.sendAction(57, 49, 14155778, 1, "Perform", "<col=ff9040>Explore</col>");

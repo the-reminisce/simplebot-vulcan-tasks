@@ -13,7 +13,7 @@ public class LeaguePanel {
     }
 
     public boolean doWeNeedToClearFilters() {
-for (LeaguePanelFilterType filterType : LeaguePanelFilterType.values()) {
+        for (LeaguePanelFilterType filterType : LeaguePanelFilterType.values()) {
             SimpleWidget dropDownMenu = ctx.widgets.getWidget(WIDGET_ID, filterType.getWidgetId());
             if (!isOptionSelected(dropDownMenu)) {
                 return true;

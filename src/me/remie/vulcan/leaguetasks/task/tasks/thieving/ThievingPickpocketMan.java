@@ -28,6 +28,7 @@ public class ThievingPickpocketMan extends LeagueTask {
                 return;
             }
             if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleport to Lumbridge");
                 ctx.teleporter.teleportStringPath("Cities", "Lumbridge");
                 ctx.onCondition(() -> ctx.pathing.regionLoaded(LeagueScriptConstants.LUMBRIDGE_REGION_ID), 250, 10);
                 return;
@@ -36,6 +37,7 @@ public class ThievingPickpocketMan extends LeagueTask {
         }
         final SimpleNpc man = ctx.npcs.populate().filter("Man", "Woman").nextNearest();
         if (man != null) {
+            script.setScriptStatus("Pickpocket " + man.getName());
             final int cachedXp = ctx.skills.experience(SimpleSkills.Skills.THIEVING);
             man.menuAction("Pickpocket");
             ctx.onCondition(() -> ctx.skills.experience(SimpleSkills.Skills.THIEVING) > cachedXp || isCompleted(), 350, 10);

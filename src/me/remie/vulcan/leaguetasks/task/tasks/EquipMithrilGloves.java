@@ -26,6 +26,7 @@ public class EquipMithrilGloves extends LeagueTask {
     public void run() {
         final SimpleItem mithrilGloves = ctx.inventory.populate().filter(MITHRIL_GLOVES).next();
         if (mithrilGloves != null) {
+            script.setScriptStatus("Equipping Mithril Gloves");
             mithrilGloves.menuAction("Wear");
             ctx.sleep(1000);
         }
