@@ -3,7 +3,7 @@
 
 # Log file
 *.log
-.idea
+.idea/*
 simplebot-vulcan-tasks.iml
 # BlueJ files
 *.ctxt
