@@ -12,9 +12,13 @@ import simple.robot.utils.WorldArea;
 public class LeagueScriptConstants {
 
     public static final int PILLORY_GUARD_ID = 380;
-
     public static final int LUNAR_ISLE_REGION_ID = 8253;
     public static final int LUMBRIDGE_REGION_ID = 12850;
+    public static final int LUMBRIDGE_COWS_REGION_ID = 12851;
+    public static final int AL_KHARID_REGION_ID = 13105;
+    public static final int VARROCK_SQUARE_REGION_ID = 12853;
+    public static final int VARROCK_EAST_REGION_ID = 13109;
+    public static final int ARDOUGNE_REGION_ID = 10547;
     public static final int GNOME_STRONGHOLD_REGION_ID = 9781;
 
     public static final WorldArea HOME_AREA = new WorldArea(new WorldPoint(3072, 3521, 0), new WorldPoint(3072, 3464, 0), new WorldPoint(3137, 3474, 0), new WorldPoint(3137, 3521, 0));

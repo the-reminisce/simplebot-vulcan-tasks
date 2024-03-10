@@ -91,7 +91,9 @@ public class WoodcuttingCore extends LeagueTask {
             ctx.menuActions.step(BANK_TILE);
             return;
         }
-        if (!ctx.bank.openBank(true)) {
+        SimpleObject bank = ctx.objects.populate().filter(28861).nearest().next();
+        if (!ctx.bank.bankOpen() && bank != null) {
+            bank.menuAction(3);
             return;
         }
         final Set<Integer> depositedIds = new HashSet<>();
