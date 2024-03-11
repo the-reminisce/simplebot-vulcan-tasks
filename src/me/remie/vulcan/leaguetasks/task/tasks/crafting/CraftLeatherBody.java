@@ -17,6 +17,8 @@ import simple.robot.api.ClientContext;
 
 import java.util.Map;
 
+import static net.runelite.api.ItemID.COWHIDE;
+
 /**
  * Created by Pepsiplaya on Mar 05, 2024 at 10:51 PM
  */
@@ -77,47 +79,37 @@ public class CraftLeatherBody extends LeagueTask {
 
     private void obtainLeather() {
         if (hasItemInInventory(THREAD_ID) && hasItemInInventory(NEEDLE_ID)) {
-            // Check inventory for cowhides
-            final int COWHIDE = 1739;
             if (ctx.inventory.populate().filter(COWHIDE).population() < 1) {
-                // Teleport to cows, kill them, and loot cowhides
                 killCowsAndLootHides();
+                return;
             }
-
-            // Check if we have cowhides to tan
-            if (ctx.inventory.populate().filter(COWHIDE).population() >= 1) {
-                // Tan cowhides into leather
-                tanCowhidesIntoLeather();
-            }
+            tanCowhidesIntoLeather();
         }
     }
 
     private void killCowsAndLootHides() {
-            if (!ctx.pathing.regionLoaded(LeagueScriptConstants.LUMBRIDGE_COWS_REGION_ID)) {
-                if (!teleportHome()) {
-                    return;
-                }
-                if (ctx.teleporter.open()) {
-                    script.setScriptStatus("Teleporting to Cows");
-                    ctx.teleporter.teleportStringPath("Training", "Cows & Goblins");
-                    ctx.onCondition(() -> ctx.pathing.regionLoaded(LeagueScriptConstants.LUMBRIDGE_COWS_REGION_ID), 250, 10);
-                    return;
-                }
-            } else {
-                SimpleGroundItem drop = ctx.groundItems.nearest().peekNext();
-                if (!ctx.groundItems.populate().filterContains("Cowhide").isEmpty() && drop != null && ctx.inventory.canPickupItem(drop)) {
-                    drop.menuAction("Take");
-                    ctx.sleep(600);
-                    return;
-                }
-                SimpleNpc cow = cows(ctx).nearest().next();
-                if (cow != null && !isNpcEngaged(cow)) {
-                    engageCow(cow);
-                }
+        if (!ctx.pathing.regionLoaded(LeagueScriptConstants.LUMBRIDGE_COWS_REGION_ID)) {
+            if (!teleportHome()) {
+                return;
             }
-        // Teleport to "Training", "Cows & Goblins"
-        // Locate cows, engage in combat, and pick up cowhides
-        // Implement combat and looting logic here
+            if (ctx.teleporter.open()) {
+                script.setScriptStatus("Teleporting to Cows");
+                ctx.teleporter.teleportStringPath("Training", "Cows & Goblins");
+                ctx.onCondition(() -> ctx.pathing.regionLoaded(LeagueScriptConstants.LUMBRIDGE_COWS_REGION_ID), 250, 10);
+                return;
+            }
+        } else {
+            SimpleGroundItem drop = ctx.groundItems.nearest().peekNext();
+            if (!ctx.groundItems.populate().filter(COWHIDE).isEmpty() && drop != null && ctx.inventory.canPickupItem(drop)) {
+                drop.menuAction("Take");
+                ctx.sleep(600);
+                return;
+            }
+            SimpleNpc cow = cows(ctx).nearest().next();
+            if (cow != null && !isNpcEngaged(cow)) {
+                engageCow(cow);
+            }
+        }
     }
 
     private void tanCowhidesIntoLeather() {
