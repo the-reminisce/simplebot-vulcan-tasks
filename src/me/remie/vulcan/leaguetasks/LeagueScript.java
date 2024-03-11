@@ -94,18 +94,18 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new LunarIsleBank(this),
                 new CraftGhorrockTablet(this),
                 new ThievingLevel20(this),
-                new ThievingPickpocketKnight50(this),
+                new ThievingPickpocketMan(this),
                 new ThievingStealSilk(this),
                 new ThievingStealTea(this),
+                new ThievingPickpocketKnight50(this),
                 new EquipGodBook(this),
-                new ThievingPickpocketMan(this),
+                new CraftLeatherBody(this),
                 new TreeGnomeAgility(this),
                 new DraynorRooftopAgility(this),
                 new VarrockRooftopAgility(this),
                 new ChopNormalLogs(this),
                 new ChopWillowLogs(this),
-                new ChopMagicLogs(this),
-                new CraftLeatherBody(this)
+                new ChopMagicLogs(this)
         );
         setupPaint();
         this.teleporterScrollHelper = new TeleporterScrollHelper(ctx);

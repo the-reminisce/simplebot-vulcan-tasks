@@ -41,7 +41,6 @@ public class CraftLeatherBody extends LeagueTask {
             if (!ctx.dialogue.dialogueOpen()) {
                 SimpleItem leather = ctx.inventory.populate().filter(LEATHER).next();
                 SimpleItem needle = ctx.inventory.populate().filter(NEEDLE_ID).next();
-                SimpleItem thread = ctx.inventory.populate().filter(THREAD_ID).next();
                 needle.menuAction("Use");
                 ctx.sleep(600);
                 leather.click(0);
@@ -52,10 +51,16 @@ public class CraftLeatherBody extends LeagueTask {
             }
         }
         if (!hasItemInInventory(NEEDLE_ID)) {
+            if (!teleportHome()) {
+                return;
+            }
             shopHelper.buyItem(NEEDLE, ShopType.GENERAL_STORE);
         }
 
         if (!hasItemInInventory(THREAD_ID)) {
+            if (!teleportHome()) {
+                return;
+            }
             shopHelper.buyItem(THREAD, ShopType.GENERAL_STORE);
         }
 
