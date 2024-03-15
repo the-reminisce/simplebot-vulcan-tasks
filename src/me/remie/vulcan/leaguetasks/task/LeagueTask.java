@@ -5,6 +5,7 @@ import me.remie.vulcan.leaguetasks.data.LeagueScriptConstants;
 import me.remie.vulcan.leaguetasks.helpers.TeleporterScrollHelper;
 import me.remie.vulcan.leaguetasks.task.requirement.ItemRequirement;
 import me.remie.vulcan.leaguetasks.task.requirement.SkillRequirement;
+import simple.hooks.simplebot.ChatMessage;
 import simple.robot.api.ClientContext;
 
 import java.util.Optional;
@@ -73,6 +74,9 @@ public abstract class LeagueTask {
     }
 
     public abstract void run();
+
+    public void onChatMessage(final ChatMessage e) {
+    }
 
     // Helpers
 

@@ -235,6 +235,9 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
 
     @Override
     public void onChatMessage(ChatMessage e) {
+        if (this.currentTask != null) {
+            this.currentTask.onChatMessage(e);
+        }
         if (e.getType() != ChatMessageType.GAMEMESSAGE || e.getSender() != null || !e.getName().isEmpty()) {
             return;
         }
