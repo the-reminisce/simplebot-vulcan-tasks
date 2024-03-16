@@ -12,13 +12,12 @@ import me.remie.vulcan.leaguetasks.task.tasks.OpenLeaguesMenu;
 import me.remie.vulcan.leaguetasks.task.tasks.agility.DraynorRooftopAgility;
 import me.remie.vulcan.leaguetasks.task.tasks.agility.TreeGnomeAgility;
 import me.remie.vulcan.leaguetasks.task.tasks.agility.VarrockRooftopAgility;
+import me.remie.vulcan.leaguetasks.task.tasks.crafting.CraftLeatherBody;
 import me.remie.vulcan.leaguetasks.task.tasks.emotes.EmoteExplore;
 import me.remie.vulcan.leaguetasks.task.tasks.emotes.EmoteUriTransformation;
 import me.remie.vulcan.leaguetasks.task.tasks.slayer.CheckSlayerTask;
 import me.remie.vulcan.leaguetasks.task.tasks.slayer.SlayerTaskDuradel;
-import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingLevel20;
-import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingPickpocketMan;
-import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingStealSilk;
+import me.remie.vulcan.leaguetasks.task.tasks.thieving.*;
 import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelDeathsDomain;
 import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelFossilIsland;
 import me.remie.vulcan.leaguetasks.task.tasks.travel.TravelMosleHarmless;
@@ -95,9 +94,12 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new LunarIsleBank(this),
                 new CraftGhorrockTablet(this),
                 new ThievingLevel20(this),
-                new ThievingStealSilk(this),
-                new EquipGodBook(this),
                 new ThievingPickpocketMan(this),
+                new ThievingStealSilk(this),
+                new ThievingStealTea(this),
+                new ThievingPickpocketKnight50(this),
+                new EquipGodBook(this),
+                new CraftLeatherBody(this),
                 new TreeGnomeAgility(this),
                 new DraynorRooftopAgility(this),
                 new VarrockRooftopAgility(this),
