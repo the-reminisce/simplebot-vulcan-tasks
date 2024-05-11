@@ -25,6 +25,7 @@ public class WoodcuttingCore extends LeagueTask {
     private static final WorldPoint BANK_TILE = new WorldPoint(1592, 3476, 0);
     private static final ItemDetails IRON_AXE = new ItemDetails("Iron axe", 1349, 1_000);
     private static final ItemDetails RUNE_AXE = new ItemDetails("Rune axe", 1359, 250_000);
+    private static final int BANK_CHEST_WC_GUILD = 28861;
 
     private final ShopHelper ironAxeShopHelper;
     private final ShopHelper runeAxeShopHelper;
@@ -91,9 +92,17 @@ public class WoodcuttingCore extends LeagueTask {
             ctx.menuActions.step(BANK_TILE);
             return;
         }
-        if (!ctx.bank.openBank(true)) {
+
+        // Temporary fix because Vulcan is missing chest id.
+        if (distance <= 1 && !ctx.bank.bankOpen()) {
+            final SimpleObject bankChest = ctx.objects.populate().filter(BANK_CHEST_WC_GUILD).nextNearest();
+            if (bankChest != null) {
+                script.setScriptStatus("Opening " + bankChest.getName());
+                bankChest.menuAction("Use");
+            }
             return;
         }
+
         final Set<Integer> depositedIds = new HashSet<>();
         for (final SimpleItem item : ctx.inventory.populate().omit(getRequiredAxe().getItemId())) {
             if (depositedIds.contains(item.getId())) {
