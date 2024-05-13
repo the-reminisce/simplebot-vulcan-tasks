@@ -14,6 +14,7 @@ import me.remie.vulcan.leaguetasks.task.tasks.agility.TreeGnomeAgility;
 import me.remie.vulcan.leaguetasks.task.tasks.agility.VarrockRooftopAgility;
 import me.remie.vulcan.leaguetasks.task.tasks.emotes.EmoteExplore;
 import me.remie.vulcan.leaguetasks.task.tasks.emotes.EmoteUriTransformation;
+import me.remie.vulcan.leaguetasks.task.tasks.fishing.FishAnchovies;
 import me.remie.vulcan.leaguetasks.task.tasks.slayer.CheckSlayerTask;
 import me.remie.vulcan.leaguetasks.task.tasks.slayer.SlayerTaskDuradel;
 import me.remie.vulcan.leaguetasks.task.tasks.thieving.ThievingLevel20;
@@ -98,6 +99,7 @@ public class LeagueScript extends Script implements LoopingScript, MouseListener
                 new ThievingStealSilk(this),
                 new EquipGodBook(this),
                 new ThievingPickpocketMan(this),
+                new FishAnchovies(this),
                 new TreeGnomeAgility(this),
                 new DraynorRooftopAgility(this),
                 new VarrockRooftopAgility(this),
